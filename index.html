@@ -39,9 +39,11 @@
        app.component('custom-login-form', {
            template: `
          <form @submit.prevent="handleSubmit">
-            <p v-for="(str,i) in inputs" v-bind:key="i">{{str}}</p>
-            <custom-input v-model="email" v-bind:label="emailLable"/>
-            <custom-input v-model="password" v-bind:label="passwordLabel"/>
+            <custom-input 
+                v-for="(index,i) in inputs" v-bind:key="i" 
+                v-model="index.value" 
+                v-bind:label="index.label"
+                v-bind:type="index.type"/> 
             <input type="submit" value="submit">
         </form>               
            `,
@@ -49,16 +51,22 @@
            data() {
                return {
                    title: 'Login Form',
-                   inputs: ['email', 'password', 'name'],
-                   email: '',
-                   password: '',
-                   emailLable: 'email',
-                   passwordLabel: 'password'
+                   inputs: [
+                       {
+                           label: 'Email', value: '', type:'email'
+                       },
+                       {
+                           label: 'Password', value: '', type:'password'
+                       },
+                       {
+                           label: 'Name', value: '', type:'text'
+                       },
+                   ], 
                }
            },
            methods: {
                handleSubmit() {
-                   alert(this.email + this.password)
+                   alert(this.inputs[0].value + this.inputs[2].value)
                }
            },
        })
@@ -66,11 +74,11 @@
            template: `
            <label>
                 {{ label }}
-                <input type="text" v-model='inputValue'>
+                <input v-bind:type="type" v-model='inputValue'>
             </label>
             <br/>
            `,
-           props: ['label', 'modelValue'],
+           props: ['label', 'type', 'modelValue'],
            computed: {
                inputValue: {
                    get() {

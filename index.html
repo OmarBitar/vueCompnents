@@ -16,6 +16,8 @@
         <h1> {{ greeting }} </h1>
 
         <custom-login-form />
+
+        
     </div>
 
 
@@ -37,18 +39,19 @@
        app.component('custom-login-form', {
            template: `
          <form @submit.prevent="handleSubmit">
-            <label for="email">enter email</label>
-            <input v-model="email" id="email" type="email">
-            <label for="passowrd">enter password</label>
-            <input v-model="password" type="password">
+            <custom-input v-bind:label="emailLable"/>
+            <custom-input v-bind:label="passwordLabel"/>
             <input type="submit" value="submit">
         </form>               
            `,
+           components: ['custom-input'],
            data() {
                return {
                    title: 'Login Form',
                    email: '',
-                   password: ''
+                   password: '',
+                   emailLable: 'email',
+                   passwordLabel: 'password'
                }
            },
            methods: {
@@ -56,6 +59,16 @@
                    alert(this.email + this.password)
                }
            },
+       })
+       app.component('custom-input', {
+           template: `
+           <label>
+                {{ label }}
+                <input type="text">
+            </label>
+            <br/>
+           `,
+           props: ['label']
        })
        app.mount('#app')
    </script>

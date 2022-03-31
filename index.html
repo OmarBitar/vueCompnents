@@ -39,6 +39,7 @@
        app.component('custom-login-form', {
            template: `
          <form @submit.prevent="handleSubmit">
+            <p v-for="(str,i) in inputs" v-bind:key="i">{{str}}</p>
             <custom-input v-model="email" v-bind:label="emailLable"/>
             <custom-input v-model="password" v-bind:label="passwordLabel"/>
             <input type="submit" value="submit">
@@ -48,6 +49,7 @@
            data() {
                return {
                    title: 'Login Form',
+                   inputs: ['email', 'password', 'name'],
                    email: '',
                    password: '',
                    emailLable: 'email',

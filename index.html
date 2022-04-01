@@ -41,8 +41,11 @@
            methods: { 
                log(greeting) {
                    console.log(greeting)
-               }
-           }
+               },
+           },
+           updated() {
+               console.log('updated')
+           },
        })
 
        app.component('custom-login-form', {
@@ -77,6 +80,18 @@
                handleSubmit() {
                    alert(this.inputs[0].value + this.inputs[2].value)
                }
+           },
+           created() {
+               console.log('created')
+           },
+           mounted() {
+               console.log('mounted')
+           },
+           updated() {
+               console.log('updated')
+           },
+           unmounted() {
+               console.log('unmounted')
            },
        })
        app.component('custom-input', {

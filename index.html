@@ -8,6 +8,14 @@
         [v-cloak] {
             display: none;
         }
+        .box {
+            border-radius: 10px;
+            padding: 10px;
+            border-color: green;
+            background-color: aqua;
+            height: 200px;
+            width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -15,9 +23,9 @@
     <div id="app" v-cloak>
         <h1> {{ greeting }} </h1>
 
-        <custom-login-form />
+        <button v-on:click="visibility = !visibility" >toggle</button>
+        <custom-login-form v-if="visibility" class="box"/>
 
-        
     </div>
 
 
@@ -26,7 +34,8 @@
        let app = Vue.createApp({
            data() {
                return {
-                   greeting: 'hello world'
+                   greeting: 'hello world',
+                   visibility: true
                }
            },
            methods: { 
